@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <link rel="icon" type="image/png" href="/static/images/logo.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HuyVX - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/avatar.css" />
+  <script src="/static/js/particles.js"></script>
+</head>
+
+<body>
+  <div id="loading-screen">Đang đồng bộ hệ thống dữ liệu...</div>
+
+  <nav class="sidebar">
+    <div class="sidebar-top-wrapper">
+      <!--  logo web =))) -->
+      <div class="sidebar-brand">
+        <div class="logo-wrapper">
+          <a href="https://www.huyvx.online/" class="logo-link" style="display: block; width: 100%">
+            <img src="/static/images/logo.png" alt="HUYVX Logo" class="sidebar-logo" style="cursor: pointer" />
+          </a>
+        </div>
+      </div>
+      <!-- ################################# -->
+      <!-- menu -->
+      <!-- ################################# -->
+      <!-- Facebook -->
+      <ul class="sidebar-menu">
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-brands fa-facebook"></i>
+              <span>Facebook</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="/facebook/share">Tăng share bài viết giá rẻ</a></li>
+          </ul>
+        </li>
+        <!-- tiktok -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-brands fa-tiktok"></i>
+              <span>Tiktok</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="/tiktok/view">Tăng view video giá rẻ</a></li>
+          </ul>
+        </li>
+        <!-- kiếm tiền -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-money-bills"></i>
+              <span>Kiếm tiền</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+
+          <ul class="submenu">
+            <li><a href="/kiem-tien/link-rut-gon">Link rút gọn</a></li>
+          </ul>
+        </li>
+        <!-- bán hàng -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Sản phẩm</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+
+          <ul class="submenu">
+            <li><a href="/product">Tổng quan</a></li>
+            <li><a href="/product/AI">Tài khoản AI</a></li>
+            <li><a href="/product/MXH">Tài khoản MXH</a></li>
+            <li><a href="/product/proxy">Proxy</a></li>
+          </ul>
+        </li>
+        <!-- vào tài khoản (profile) -->
+        <li>
+          <a href="/profile">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-user-gear"></i>
+              <span>Tài khoản</span>
+            </div>
+          </a>
+        </li>
+        <!-- nạp tiền -->
+        <li>
+          <a href="/nap-tien">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-credit-card"></i>
+              <span>Nạp tiền</span>
+            </div>
+          </a>
+        </li>
+        <!-- menu mẫu -->
+        <!-- <li class="has-submenu">
+            <a href="javascript:void(0);" class="submenu-toggle">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Chức năng hệ thống</span>
+              </div>
+              <i class="fa-solid fa-chevron-up arrow-icon"></i>
+            </a>
+
+            <ul class="submenu">
+              <li><a href="#">Tính năng 1</a></li>
+              <li><a href="#">Tính năng 2</a></li>
+              <li><a href="#">Tính năng 3</a></li>
+            </ul>
+          </li> -->
+      </ul>
+      <!-- xong menu -->
+    </div>
+    <!-- dang xuat + DMCA badge -->
+    <div class="sidebar-footer">
+      <button class="btn-logout" id="btnLogout">
+        <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+      </button>
+      <!-- Badge DMCA -->
+      <div class="dmca-badge-container" style="text-align: center; margin-top: 15px">
+        <a href="https://www.dmca.com/Protection/Status.aspx?ID=7f567101-2b8a-44f2-9d65-7f71f3677539&refurl=https://www.huyvx.online/"
+          title="DMCA.com Protection Status" class="dmca-badge">
+          <img src="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=7f567101-2b8a-44f2-9d65-7f71f3677539"
+            alt="DMCA.com Protection Status" /></a>
+        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+      </div>
+    </div>
+    <!-- xong dang xuat + DMCA -->
+  </nav>
+  <div class="main-wrapper">
+    <!-- thông tin hiển thị góc trên phải -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <i class="fa-solid fa-bars" id="btnToggleSidebar"></i>
+      </div>
+      <div class="topbar-right">
+        <div class="xu-display">
+          <div class="xu-display"><span id="user-coins">0</span> VNĐ</div>
+        </div>
+        <div class="user-profile" id="userProfileTrigger">
+          <div class="profile-avatar-box-mini">
+            <img src="/static/images/logo.png" alt="User Avatar" class="profile-avatar-img-mini" />
+          </div>
+          <span id="user-display">Đang tải...</span>
+        </div>
+      </div>
+    </header>
+    <!-- xong thông tin hiển thị góc trên phải -->
+    <main class="content-container">
+      <!-- thông báo  -->
+      <div class="feed-column">
+        <div class="post-card">
+          <div class="post-header">
+            <div class="avatar-box">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="post-meta">
+              <h4>
+                Admin
+                <i class="fa-solid fa-circle-check" style="color: #3b82f6; font-size: 0.85rem"></i>
+              </h4>
+              <span>14-06-2026 • <i class="fa-solid fa-users"></i></span>
+            </div>
+          </div>
+          <div class="post-title">[Thông báo]</div>
+          <div class="post-body">
+            <strong>*Xin chào đến với HuyVX</strong>
+            <ul>
+              <li>Xin chào đến với HuyVX.online</li>
+            </ul>
+          </div>
+          <div class="post-actions">
+            <span><i class="fa-regular fa-thumbs-up"></i> Like</span>
+            <span><i class="fa-regular fa-comment"></i> Comment</span>
+            <span><i class="fa-solid fa-share"></i> Share</span>
+          </div>
+        </div>
+      </div>
+      <!-- xong thông báo  -->
+
+      <!-- bảng rank  -->
+      <div class="ranking-column">
+        <div class="ranking-title">
+          <span><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 5px"></i>
+            Top 10 Số Dư Lớn Nhất</span>
+          <span id="ranking-refresh-time">Đang cập nhật...</span>
+        </div>
+
+        <div class="ranking-list" id="top-wealthy-list">
+          <div class="ranking-item">
+            <div class="avatar-box">1</div>
+            <div class="rank-info">
+              <div class="rank-user">Đang tải dữ liệu...</div>
+              <div class="rank-score">0 VNĐ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- bảng rank  -->
+    </main>
+  </div>
+  <div id="particles-js"></div>
+  <script src="/static/js/new_index.js"></script>
+  <script src="/static/js/index.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/rank.js"></script>
+</body>
+
+</html>

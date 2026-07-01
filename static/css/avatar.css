@@ -1,0 +1,43 @@
+/* --- ĐỊNH DẠNG ẢNH LOGO LÀM AVATAR TRANG PROFILE --- */
+.profile-avatar-box {
+  width: 110px;
+  height: 110px;
+  background-color: #1e293b;
+  border-radius: 50%;
+  border: 4px solid #111c2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Giữ cho ảnh không bị tràn ra ngoài góc bo tròn */
+}
+
+.profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  /* Thuộc tính quan trọng: giúp ảnh tự co giãn vừa vặn mà không bị mất tỷ lệ gốc */
+  object-fit: contain;
+  padding: 10px; /* Thêm khoảng đệm nhỏ để logo không bị dính sát viền tròn */
+  background-color: transparent;
+}
+.profile-avatar-box-mini {
+  width: 40px;
+  height: 40px;
+  background-color: #1e293b;
+  border-radius: 50%;
+  border: 4px solid #111c2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Giữ cho ảnh không bị tràn ra ngoài góc bo tròn */
+}
+
+.profile-avatar-img-mini {
+  width: 100%;
+  height: 100%;
+  /* Thuộc tính quan trọng: giúp ảnh tự co giãn vừa vặn mà không bị mất tỷ lệ gốc */
+  object-fit: contain;
+  padding: 3px; /* Thêm khoảng đệm nhỏ để logo không bị dính sát viền tròn */
+  background-color: transparent;
+}

@@ -1,0 +1,32 @@
+{
+    "admin": {
+        "password": "123456",
+        "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJleHAiOjE3ODIwNTc3ODN9.XfcA3LnwwAy6ZRMucKSjAsMyCzPlHg2MnZ8NWe7eFCE",
+        "balance": 0,
+        "role": "Admin"
+    },
+    "PTKhoa - Giờ làm gì ae?": {
+        "password": "UAu4C2jw@X-y/e!",
+        "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiUFRLaG9hIC0gR2lcdTFlZGQgbFx1MDBlMG0gZ1x1MDBlYyBhZT8iLCJleHAiOjE3ODIwOTU1MDJ9.VJg6H0sGtjPF0MMg4cpIZ-oSeDaK7u9eHv0Xv_i6-NA",
+        "balance": 99985000,
+        "role": "Admin"
+    },
+    "admin1": {
+        "password": "Thanh11!",
+        "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4xIiwiZXhwIjoxNzgyMDk2NzA3fQ.eNKhTEvuc5CzBMm1JjlKdnDWMxOppC7XwL1J2lYr3kE",
+        "balance": 0,
+        "role": "Admin"
+    },
+    "Letuan12": {
+        "password": "letuan12",
+        "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiTGV0dWFuMTIiLCJleHAiOjE3ODIwNDU1ODd9.XCX_Sj-KfSPZRm_udmwza7w06qMFd6xAhwbXoKx5kRE",
+        "balance": 0,
+        "role": "Admin"
+    },
+    "Huy@1203": {
+        "password": "Huy@1203",
+        "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSHV5QDEyMDMiLCJleHAiOjE3ODIwOTcwODl9.1P6zVuuV9PP0YW8-ObPdmM3DJ13kgdlhqiBiPh7UBNw",
+        "balance": 0,
+        "role": "Admin"
+    }
+}

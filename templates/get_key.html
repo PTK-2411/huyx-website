@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <link rel="icon" type="image/png" href="/static/images/logo.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HuyVX - Hệ thống nhận Key</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <script src="/static/js/particles.js"></script>
+  <style>
+    /* Tối ưu riêng cho trang Get Key để canh giữa màn hình cực đẹp */
+    .get-key-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      padding: 20px;
+    }
+
+    .key-box-card {
+      background-color: rgba(17, 28, 46, 0.65);
+      /* Đồng bộ màu nền card profile.css */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(30, 41, 59, 0.5);
+      border-radius: 8px;
+      padding: 35px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo-section {
+      margin-bottom: 25px;
+    }
+
+    .logo-link {
+      display: inline-block;
+    }
+
+    .sidebar-logo {
+      max-height: 60px;
+      object-fit: contain;
+      cursor: pointer;
+    }
+
+    .key-title {
+      color: #ffffff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .key-subtitle {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 25px;
+    }
+
+    .key-display-wrapper {
+      background-color: rgba(15, 23, 42, 0.5);
+      /* Màu input ẩn của hệ thống */
+      border: 1px solid rgba(51, 65, 85, 0.4);
+      border-radius: 6px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .key-text {
+      color: #3b82f6;
+      /* Màu xanh thương hiệu nổi bật */
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.1rem;
+      font-weight: bold;
+      word-break: break-all;
+      text-align: left;
+      user-select: all;
+    }
+
+    .btn-copy-key {
+      padding: 8px 16px;
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-key:hover {
+      background-color: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="get-key-container">
+    <div class="key-box-card">
+      <div class="logo-section">
+        <a href="https://www.huyvx.online/" class="logo-link">
+          <img src="/static/images/logo.png" alt="HUYVX Logo" class="sidebar-logo" />
+        </a>
+      </div>
+
+      <h2 class="key-title">Khóa Hệ Thống Của Bạn</h2>
+      <p class="key-subtitle">
+        Vui lòng bấm nút Copy để sao chép mã Key an toàn
+      </p>
+
+      <div class="key-display-wrapper">
+        <span id="key-string" class="key-text">
+          {% if key_value %}{{ key_value }}{% else %}Không tìm thấy mã Key hợp
+          lệ!{% endif %}
+        </span>
+
+        {% if key_value %}
+        <button type="button" class="btn-copy-key" id="btn-copy-key-page">
+          <i class="fa-solid fa-copy"></i> Copy
+        </button>
+        {% endif %}
+      </div>
+
+      <div class="dmca-badge-container" style="text-align: center; margin-top: 20px">
+        <a href="https://www.dmca.com/Protection/Status.aspx?ID=7f567101-2b8a-44f2-9d65-7f71f3677539&refurl=https://www.huyvx.online/"
+          title="DMCA.com Protection Status" class="dmca-badge"> <img
+            src="https://images.dmca.com/Badges/dmca_protected_sml_120b.png?ID=7f567101-2b8a-44f2-9d65-7f71f3677539"
+            alt="DMCA.com Protection Status" /></a>
+        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnCopy = document.getElementById("btn-copy-key-page");
+      const keyElement = document.getElementById("key-string");
+
+      if (btnCopy && keyElement) {
+        btnCopy.addEventListener("click", function () {
+          const keyTextValue = keyElement.innerText.trim();
+
+          // Thực hiện copy chuỗi key vào Clipboard của máy tính/điện thoại
+          navigator.clipboard
+            .writeText(keyTextValue)
+            .then(() => {
+              // Tạo hiệu ứng UX mượt mà khi copy thành công
+              const originalHTML = btnCopy.innerHTML;
+              btnCopy.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+              btnCopy.style.backgroundColor = "#10b981"; // Đổi sang màu xanh lá báo thành công
+
+              setTimeout(() => {
+                btnCopy.innerHTML = originalHTML;
+                btnCopy.style.backgroundColor = ""; // Trả lại màu xanh dương gốc
+              }, 1500);
+            })
+            .catch((err) => {
+              console.error("Lỗi sao chép Key:", err);
+              alert("Trình duyệt không hỗ trợ tự động sao chép!");
+            });
+        });
+      }
+    });
+  </script>
+  <div id="particles-js"></div>
+  <script src="/static/js/new_index.js"></script>
+</body>
+
+</html>

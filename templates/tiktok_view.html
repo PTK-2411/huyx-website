@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <link rel="icon" type="image/png" href="/static/images/logo.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HuyVX - Tiktok View</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/avatar.css" />
+  <script src="/static/js/particles.js"></script>
+</head>
+
+<body>
+  <div id="loading-screen">Đang đồng bộ hệ thống dữ liệu...</div>
+
+  <nav class="sidebar">
+    <div class="sidebar-top-wrapper">
+      <!--  logo web =))) -->
+      <div class="sidebar-brand">
+        <div class="logo-wrapper">
+          <a href="https://www.huyvx.online/" class="logo-link" style="display: block; width: 100%">
+            <img src="/static/images/logo.png" alt="HUYVX Logo" class="sidebar-logo" style="cursor: pointer" />
+          </a>
+        </div>
+      </div>
+      <!-- ################################# -->
+      <!-- menu -->
+      <!-- ################################# -->
+      <!-- Facebook -->
+      <ul class="sidebar-menu">
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-brands fa-facebook"></i>
+              <span>Facebook</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="/facebook/share">Tăng share bài viết giá rẻ</a></li>
+          </ul>
+        </li>
+        <!-- tiktok -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-brands fa-tiktok"></i>
+              <span>Tiktok</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="/tiktok/view">Tăng view video giá rẻ</a></li>
+          </ul>
+        </li>
+        <!-- kiếm tiền -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-money-bills"></i>
+              <span>Kiếm tiền</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+
+          <ul class="submenu">
+            <li><a href="/kiem-tien/link-rut-gon">Link rút gọn</a></li>
+          </ul>
+        </li>
+        <!-- bán hàng -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Sản phẩm</span>
+            </div>
+            <i class="fa-solid fa-chevron-up arrow-icon"></i>
+          </a>
+
+          <ul class="submenu">
+            <li><a href="/product">Tổng quan</a></li>
+            <li><a href="/product/AI">Tài khoản AI</a></li>
+            <li><a href="/product/MXH">Tài khoản MXH</a></li>
+            <li><a href="/product/proxy">Proxy</a></li>
+          </ul>
+        </li>
+        <!-- vào tài khoản (profile) -->
+        <li>
+          <a href="/profile">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-user-gear"></i>
+              <span>Tài khoản</span>
+            </div>
+          </a>
+        </li>
+        <!-- nạp tiền -->
+        <li>
+          <a href="/nap-tien">
+            <div class="menu-item-left">
+              <i class="fa-solid fa-credit-card"></i>
+              <span>Nạp tiền</span>
+            </div>
+          </a>
+        </li>
+        <!-- menu mẫu -->
+        <!-- <li class="has-submenu">
+            <a href="javascript:void(0);" class="submenu-toggle">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Chức năng hệ thống</span>
+              </div>
+              <i class="fa-solid fa-chevron-up arrow-icon"></i>
+            </a>
+
+            <ul class="submenu">
+              <li><a href="#">Tính năng 1</a></li>
+              <li><a href="#">Tính năng 2</a></li>
+              <li><a href="#">Tính năng 3</a></li>
+            </ul>
+          </li> -->
+      </ul>
+      <!-- xong menu -->
+    </div>
+    <!-- dang xuat -->
+    <div class="sidebar-footer">
+      <button class="btn-logout" id="btnLogout">
+        <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+      </button>
+
+      <!-- Badge DMCA -->
+      <div class="dmca-badge-container" style="text-align: center; margin-top: 15px">
+        <a href="https://www.dmca.com/Protection/Status.aspx?ID=7f567101-2b8a-44f2-9d65-7f71f3677539&refurl=https://www.huyvx.online/"
+          title="DMCA.com Protection Status" class="dmca-badge">
+          <img src="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=7f567101-2b8a-44f2-9d65-7f71f3677539"
+            alt="DMCA.com Protection Status" /></a>
+        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+      </div>
+    </div>
+    <!-- xong dang xuat -->
+  </nav>
+  <div class="main-wrapper">
+    <!-- thông tin hiển thị góc trên phải -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <i class="fa-solid fa-bars" id="btnToggleSidebar"></i>
+      </div>
+      <div class="topbar-right">
+        <div class="xu-display">
+          <div class="xu-display"><span id="user-coins">0</span> VNĐ</div>
+        </div>
+        <div class="user-profile" id="userProfileTrigger">
+          <div class="profile-avatar-box-mini">
+            <img src="/static/images/logo.png" alt="User Avatar" class="profile-avatar-img-mini" />
+          </div>
+          <span id="user-display">Đang tải...</span>
+        </div>
+      </div>
+    </header>
+    <!-- xong thông tin hiển thị góc trên phải -->
+    <main class="content-container">
+      <!-- thông báo  -->
+      <div class="feed-column">
+        <div class="order-card">
+          <div class="order-header">
+            <h3>
+              <i class="fa-brands fa-tiktok" style="color: rgb(255, 255, 255); margin-right: 8px"></i>
+              Tạo Tiến Trình: Tiktok view
+            </h3>
+            <span class="service-badge">Hệ thống HuyVX</span>
+          </div>
+
+          <form id="form-order-share" class="order-form">
+            <div class="form-group">
+              <label for="post-url">Link hoặc ID bài viết <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-link input-icon"></i>
+                <input type="text" id="post-url" placeholder="Nhập liên kết bài viết Tiktok cần tăng view..."
+                  required />
+              </div>
+              <small class="form-note">Hệ thống hỗ trợ cả link bài viết dạng công khai, tự động lọc
+                ID.</small>
+            </div>
+
+            <div class="form-group">
+              <label>Chọn máy chủ (Server) <span class="required">*</span></label>
+              <div class="server-list">
+                <label class="server-option">
+                  <input type="radio" name="server-select" value="sv1" checked />
+                  <div class="server-box-info">
+                    <div class="server-title">
+                      <span class="server-name">Server 1 (Nhanh - Vừa)</span>
+                      <span class="server-status badge-active">Hoạt động</span>
+                    </div>
+                    <p class="server-desc">
+                      Giống người thật giảm khả năng tuột view!
+                    </p>
+                    <div class="server-price">15 VNĐ / view</div>
+                  </div>
+                </label>
+
+                <label class="server-option">
+                  <input type="radio" name="server-select" value="sv2" />
+                  <div class="server-box-info">
+                    <div class="server-title">
+                      <span class="server-name">Server 2 (Nhanh - Rất nhanh)</span>
+                      <span class="server-status badge-active">Hoạt động</span>
+                    </div>
+                    <p class="server-desc">
+                      Yêu cầu sẽ được ưu tiên đẩy lên giúp xử lý nhanh hơn!
+                    </p>
+                    <div class="server-price">35 VNĐ / view</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="share-quantity">Số lượng cần mua <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-calculator input-icon"></i>
+                <input type="number" id="share-quantity" min="1000" value="1000"
+                  placeholder="Tối thiểu 1000 - Tối đa không giới hạn." required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="order-note">Ghi chú (Nếu có)</label>
+              <textarea id="order-note" rows="2"
+                placeholder="Nhập lời nhắn cho hệ thống (không bắt buộc)..."></textarea>
+            </div>
+
+            <div class="order-notice-box">
+              <div class="notice-title">
+                <i class="fa-solid fa-triangle-exclamation"></i> HÃY ĐỌC ĐỂ
+                TRÁNH MẤT XU KHI SỬ DỤNG!
+              </div>
+              <ul class="notice-list">
+                <li>Mở công khai bài viết và mở cho mọi người share.</li>
+                <li>Mua tối thiểu 1000 view, tối đa không giới hạn.</li>
+                <li>
+                  Mua bằng link bài viết.(ví dụ
+                  https://www.tiktok.com/@khoa.../video/760760...)
+                </li>
+                <li>
+                  Nếu không làm đúng các lưu ý trên và gặp lỗi chúng tôi sẽ
+                  không hỗ trợ!!!
+                </li>
+              </ul>
+            </div>
+
+            <div class="total-payment-box">
+              <div class="payment-row">
+                <span>Giá mỗi lượt view:</span>
+                <span id="single-price" class="price-highlight">15 VNĐ</span>
+              </div>
+              <div class="payment-row total-row">
+                <span>Tổng chi phí dự kiến:</span>
+                <span id="total-price" class="total-highlight">15,000 VNĐ</span>
+              </div>
+            </div>
+
+            <div id="form-message-box" style="
+                  display: block;
+                  text-align: center;
+                  font-size: 0.9rem;
+                  font-weight: 600;
+                  transition: all 0.2s ease;
+                "></div>
+
+            <button type="submit" class="btn-order-submit">
+              <i class="fa-solid fa-cart-shopping"></i> Tạo Tiến Trình Ngay
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- xong thông báo  -->
+
+      <!-- bảng rank  -->
+      <div class="ranking-column">
+        <div class="ranking-title">
+          <span><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 5px"></i>
+            Top 10 Số Dư Lớn Nhất</span>
+          <span id="ranking-refresh-time">Đang cập nhật...</span>
+        </div>
+
+        <div class="ranking-list" id="top-wealthy-list">
+          <div class="ranking-item">
+            <div class="avatar-box">1</div>
+            <div class="rank-info">
+              <div class="rank-user">Đang tải dữ liệu...</div>
+              <div class="rank-score">0 VNĐ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- bảng rank  -->
+    </main>
+  </div>
+
+  <div id="particles-js"></div>
+  <script src="/static/js/new_index.js"></script>
+  <script src="/static/js/index.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/rank.js"></script>
+  <script src="/static/js/tiktok_view.js"></script>
+</body>
+
+</html>

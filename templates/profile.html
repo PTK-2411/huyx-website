@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <link rel="icon" type="image/png" href="/static/images/logo.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HuyVX - Thông tin cá nhân</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/avatar.css" />
+  <script src="/static/js/particles.js"></script>
+</head>
+
+<body>
+  <div id="loading-screen">Đang đồng bộ cấu hình tài khoản...</div>
+
+  <div class="profile-wrapper">
+    <a href="/" class="back-home">
+      <i class="fa-solid fa-arrow-left"></i> Quay lại Dashboard
+    </a>
+
+    <div class="profile-header-card">
+      <div class="profile-banner"></div>
+      <div class="profile-meta-wrapper">
+        <div class="profile-avatar-box">
+          <img src="/static/images/logo.png" alt="User Avatar" class="profile-avatar-img" />
+        </div>
+        <div class="profile-user-info">
+          <h2 id="profile-name-title">Đang tải...</h2>
+          <span id="profile-role-title">Đang tải...</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h3>Thông tin tài khoản</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tên đăng nhập:</label>
+            <input type="text" id="profile-username" value="Đang tải..." disabled />
+          </div>
+          <div class="form-group">
+            <label>Hiện có:</label>
+            <input type="text" id="profile-balance" value="Đang tải..." disabled />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Access_token : (không được chia sẻ với ai)</label>
+          <div class="input-with-btn">
+            <input type="text" id="profile-token" value="Đang tải..." disabled />
+            <button type="button" class="btn-action" id="btn-copy-token" title="Sao chép token">
+              <i class="fa-solid fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <h3>Đổi mật khẩu</h3>
+        <form id="form-change-password">
+          <div class="form-group">
+            <label>Mật khẩu cũ</label>
+            <input type="password" id="old-password" placeholder="********" required />
+          </div>
+          <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input type="password" id="new-password" placeholder="********" required />
+          </div>
+          <div class="form-group">
+            <label>Nhập lại mật khẩu mới</label>
+            <input type="password" id="confirm-password" placeholder="********" required />
+          </div>
+          <button type="submit" class="btn-submit-password">
+            Đổi mật khẩu
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="particles-js"></div>
+  <script src="/static/js/new_index.js"></script>
+  <script src="/static/js/profile.js"></script>
+</body>
+
+</html>
