@@ -2,7 +2,8 @@ import datetime
 import json
 import os
 import time
-import sqlite3
+import psycopg2
+import psycopg2.extras
 import hashlib
 import random
 import requests
@@ -13,15 +14,14 @@ import jwt
 
 app = Flask(__name__)
 SECRET_KEY = "huyx_super_secret_key_123"
-DB_FILE = "system.db"  # File cơ sở dữ liệu SQL duy nhất
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://neondb_owner:npg_7sFk6Tjergyb@ep-dark-cake-atro3nrq.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require")
 
 # -------------------------------------------------------------------------
 # 1. CÁC HÀM TRỢ GIÚP KẾT NỐI VÀ KHỞI TẠO CƠ SỞ DỮ LIỆU SQL
 # -------------------------------------------------------------------------
 def get_db_connection():
-    """Tạo kết nối tới SQLite và cấu hình trả về kết quả dạng Dictionary"""
-    conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row
+    """Tạo kết nối tới PostgreSQL và cấu hình trả về Dictionary"""
+    conn = psycopg2.connect(DATABASE_URL, cursor_factory=psycopg2.extras.RealDictCursor)
     return conn
 
 def init_db():
@@ -42,7 +42,7 @@ def init_db():
     # Tạo bảng quản lý tiến trình/đơn hàng (tiktok_view)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS tiktok_view (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             username TEXT NOT NULL,
             url TEXT NOT NULL,             -- Đường dẫn (Link bài viết)
             type TEXT NOT NULL,            -- Loại dịch vụ (vd: tiktok_view)
@@ -52,14 +52,14 @@ def init_db():
             note TEXT DEFAULT '',          -- Ghi chú bổ sung
             status TEXT DEFAULT 'pending', -- Trạng thái: pending, processing, completed, error
             priority INTEGER NOT NULL,     -- Độ ưu tiên sắp xếp (1: Cao, 2: Thường)
-            created_at REAL NOT NULL       -- Mốc thời gian tạo đơn
+            created_at DOUBLE PRECISION NOT NULL       -- Mốc thời gian tạo đơn
         )
     ''')
     
     # Tạo bảng quản lý tiến trình/đơn hàng (facebook_share)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS facebook_share (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             username TEXT NOT NULL,
             url TEXT NOT NULL,             -- Đường dẫn (Link bài viết)
             type TEXT NOT NULL,            -- Loại dịch vụ (vd: fb_share)
@@ -69,7 +69,7 @@ def init_db():
             note TEXT DEFAULT '',          -- Ghi chú bổ sung
             status TEXT DEFAULT 'pending', -- Trạng thái: pending, processing, completed, error
             priority INTEGER NOT NULL,     -- Độ ưu tiên sắp xếp (1: Cao, 2: Thường)
-            created_at REAL NOT NULL       -- Mốc thời gian tạo đơn
+            created_at DOUBLE PRECISION NOT NULL       -- Mốc thời gian tạo đơn
         )
     ''')
     
@@ -78,7 +78,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS task_keys (
             key TEXT PRIMARY KEY,
             username TEXT NOT NULL,
-            created_at REAL NOT NULL
+            created_at DOUBLE PRECISION NOT NULL
         )
     ''')
     
@@ -188,7 +188,7 @@ def login_api():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
 
         if user and user["password"] == password:
@@ -199,7 +199,7 @@ def login_api():
             token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
             # Đồng bộ token mới vào SQL
-            cursor.execute("UPDATE users SET auth_token = ? WHERE username = ?", (token, username))
+            cursor.execute("UPDATE users SET auth_token = %s WHERE username = %s", (token, username))
             conn.commit()
             conn.close()
 
@@ -224,13 +224,13 @@ def register_api():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT username FROM users WHERE username = %s", (username,))
         if cursor.fetchone():
             conn.close()
             return jsonify({"status": "error", "message": "Tài khoản này đã tồn tại!"}), 400
 
         # Lưu thông tin tài khoản mới
-        cursor.execute("INSERT INTO users (username, password, balance, role) VALUES (?, ?, 0, 'Member')", (username, password))
+        cursor.execute("INSERT INTO users (username, password, balance, role) VALUES (%s, %s, 0, 'Member')", (username, password))
         conn.commit()
         conn.close()
         
@@ -253,7 +253,7 @@ def me_api():
 
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         conn.close()
         
@@ -293,7 +293,7 @@ def change_password_api():
 
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
 
         if user and user["auth_token"] == token:
@@ -305,7 +305,7 @@ def change_password_api():
                 conn.close()
                 return jsonify({"status": "error", "message": "Mật khẩu mới trùng mật khẩu cũ!"}), 400
 
-            cursor.execute("UPDATE users SET password = ? WHERE username = ?", (new_password, username))
+            cursor.execute("UPDATE users SET password = %s WHERE username = %s", (new_password, username))
             conn.commit()
             conn.close()
 
@@ -377,7 +377,7 @@ def create_tiktok_view_order():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         
         if not user or user["auth_token"] != token:
@@ -396,7 +396,7 @@ def create_tiktok_view_order():
 
         # Nếu đủ tiền -> Tiến hành trừ tiền user trong cơ sở dữ liệu
         new_balance = current_balance - total_price
-        cursor.execute("UPDATE users SET balance = ? WHERE username = ?", (new_balance, username))
+        cursor.execute("UPDATE users SET balance = %s WHERE username = %s", (new_balance, username))
 
         # Phân mức ưu tiên cho máy chủ chọn mua (Số bé đứng trước trong hàng đợi)
         priority = 1 if server == "sv2" else 2
@@ -405,7 +405,7 @@ def create_tiktok_view_order():
         # Đẩy công việc vào bảng `tiktok_view` ở trạng thái 'waiting'
         cursor.execute('''
             INSERT INTO tiktok_view (username, url, type, server, quantity, price, note, priority, status, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'waiting', ?)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'waiting', %s)
         ''', (username, url, 'tiktok_view', server, quantity, total_price, note, priority, timestamp))
 
         conn.commit()
@@ -457,7 +457,7 @@ def create_facebook_share_order():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         
         if not user or user["auth_token"] != token:
@@ -476,7 +476,7 @@ def create_facebook_share_order():
 
         # Nếu đủ tiền -> Tiến hành trừ tiền user trong cơ sở dữ liệu
         new_balance = current_balance - total_price
-        cursor.execute("UPDATE users SET balance = ? WHERE username = ?", (new_balance, username))
+        cursor.execute("UPDATE users SET balance = %s WHERE username = %s", (new_balance, username))
 
         # Phân mức ưu tiên cho máy chủ chọn mua (Số bé đứng trước trong hàng đợi)
         priority = 1 if server == "sv2" else 2
@@ -485,7 +485,7 @@ def create_facebook_share_order():
         # Đẩy công việc vào bảng `facebook_share` ở trạng thái 'waiting'
         cursor.execute('''
             INSERT INTO facebook_share (username, url, type, server, quantity, price, note, priority, status, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'waiting', ?)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'waiting', %s)
         ''', (username, url, 'facebook_share', server, quantity, total_price, note, priority, timestamp))
 
         conn.commit()
@@ -523,7 +523,7 @@ def admin_add_balance():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT balance FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT balance FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         
         if not user:
@@ -531,7 +531,7 @@ def admin_add_balance():
             return jsonify({"status": "error", "message": "Không tồn tại người dùng này trên hệ thống."}), 404
             
         new_balance = user["balance"] + amount
-        cursor.execute("UPDATE users SET balance = ? WHERE username = ?", (new_balance, username))
+        cursor.execute("UPDATE users SET balance = %s WHERE username = %s", (new_balance, username))
         
         conn.commit()
         conn.close()
@@ -564,7 +564,7 @@ def generate_task_api():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("SELECT auth_token FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT auth_token FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         if not user or user["auth_token"] != token:
             conn.close()
@@ -577,7 +577,7 @@ def generate_task_api():
 
         # Lưu key vào db
         timestamp = time.time()
-        cursor.execute("INSERT INTO task_keys (key, username, created_at) VALUES (?, ?, ?)", (key, username, timestamp))
+        cursor.execute("INSERT INTO task_keys (key, username, created_at) VALUES (%s, %s, %s)", (key, username, timestamp))
         conn.commit()
         conn.close()
 
@@ -649,14 +649,14 @@ def verify_task_api():
         cursor = conn.cursor()
         
         # Kiểm tra token hợp lệ
-        cursor.execute("SELECT balance, auth_token FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT balance, auth_token FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         if not user or user["auth_token"] != token:
             conn.close()
             return jsonify({"status": "error", "message": "Phiên làm việc không hợp lệ."}), 401
 
         # Kiểm tra key
-        cursor.execute("SELECT * FROM task_keys WHERE key = ? AND username = ?", (key, username))
+        cursor.execute("SELECT * FROM task_keys WHERE key = %s AND username = %s", (key, username))
         task = cursor.fetchone()
 
         if not task:
@@ -664,10 +664,10 @@ def verify_task_api():
             return jsonify({"status": "error", "message": "Mã xác nhận không hợp lệ hoặc không thuộc về bạn!"}), 400
 
         # Đúng key, xoá key và cộng tiền
-        cursor.execute("DELETE FROM task_keys WHERE key = ?", (key,))
+        cursor.execute("DELETE FROM task_keys WHERE key = %s", (key,))
         
         new_balance = user["balance"] + 300
-        cursor.execute("UPDATE users SET balance = ? WHERE username = ?", (new_balance, username))
+        cursor.execute("UPDATE users SET balance = %s WHERE username = %s", (new_balance, username))
         
         conn.commit()
         conn.close()
